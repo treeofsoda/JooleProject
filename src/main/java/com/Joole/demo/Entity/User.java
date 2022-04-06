@@ -31,17 +31,17 @@ public class User {
 //    )
     private String user_name;
 
-//    @Column(
-//            name = "role",
+    @Column(
+            name = "role"
 //            nullable = false
-//    )
+    )
     private String role;
-//
-//    @Column(
-//            name = "password",
+
+    @Column(
+            name = "password",
 //            nullable = false,
-//            columnDefinition = "TEXT"
-//    )
+            columnDefinition = "TEXT"
+    )
     private String password;
 
 //    @Column(

@@ -31,6 +31,8 @@ public class Product {
 //            name = "Model_year",
 //            nullable = false
 //    )
+
+
     private Long Model_year;
 
 //    @Column(
@@ -67,6 +69,11 @@ public class Product {
     )
     private List<Project_Product> project_products = new ArrayList<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private TechnicalDetail technicalDetail;
+
+
+
     public Product(Long model_year, String brand,
                    String certification, LocalDateTime time_created,
                    LocalDateTime last_updated) {
@@ -87,6 +94,14 @@ public class Product {
 
     public void setResource_id(Long resource_id) {
         this.resource_id = resource_id;
+    }
+
+    public TechnicalDetail getTechnicalDetail() {
+        return technicalDetail;
+    }
+
+    public void setTechnicalDetail(TechnicalDetail technicalDetail) {
+        this.technicalDetail = technicalDetail;
     }
 
     public Long getModel_year() {
