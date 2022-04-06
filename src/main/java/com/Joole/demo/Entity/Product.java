@@ -67,7 +67,7 @@ public class Product {
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             mappedBy = "product"
     )
-    private List<Project_Product> project_products = new ArrayList<>();
+    private List<ProjectProduct> project_products = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     private TechnicalDetail technicalDetail;
@@ -144,17 +144,17 @@ public class Product {
         this.last_updated = last_updated;
     }
 
-    public List<Project_Product> getProject_Product() {
+    public List<ProjectProduct> getProject_Product() {
         return project_products;
     }
 
-    public void addProject_Product(Project_Product project_product) {
+    public void addProject_Product(ProjectProduct project_product) {
         if (!project_products.contains(project_product)) {
             project_products.add(project_product);
         }
     }
 
-    public void removeProject_Product(Project_Product project_product) {
+    public void removeProject_Product(ProjectProduct project_product) {
         project_products.remove(project_product);
     }
 

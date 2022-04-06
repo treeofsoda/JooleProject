@@ -55,7 +55,7 @@ public class Project {
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             mappedBy = "project"
     )
-    private List<Project_Product> project_products = new ArrayList<>();
+    private List<ProjectProduct> project_products = new ArrayList<>();
 
     public Project() {
     }
@@ -98,21 +98,21 @@ public class Project {
         this.user = user;
     }
 
-    public void addProject_Product(Project_Product project_product) {
+    public void addProject_Product(ProjectProduct project_product) {
         if (!this.project_products.contains(project_product)) {
             this.project_products.add(project_product);
             project_product.setProject(this);
         }
     }
 
-    public void removeProject_Product(Project_Product project_product) {
+    public void removeProject_Product(ProjectProduct project_product) {
         if (this.project_products.contains(project_product)) {
             this.project_products.remove(project_product);
             project_product.setProject(null);
         }
     }
 
-    public List<Project_Product> getProject_Product() {
+    public List<ProjectProduct> getProject_Product() {
         return project_products;
     }
 
