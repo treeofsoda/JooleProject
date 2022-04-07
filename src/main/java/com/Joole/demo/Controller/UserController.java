@@ -1,20 +1,16 @@
 package com.Joole.demo.Controller;
 
-import com.Joole.demo.Entity.Project;
-import com.Joole.demo.Entity.User;
-import com.Joole.demo.Service.UserService;
+import com.Joole.demo.Service.impl.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("User")
 public class UserController {
-    private final UserService userService;
+    private final UserServiceImp userService;
     
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserServiceImp userService){
         this.userService = userService;
     }
 
