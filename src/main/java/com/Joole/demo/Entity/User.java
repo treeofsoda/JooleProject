@@ -64,6 +64,17 @@ public class User {
     )
     private List<Project> projects = new ArrayList<>();
 
+    public User(String user_name, String role,
+                String password,
+                LocalDateTime time_created,
+                LocalDateTime last_updated) {
+        this.user_name = user_name;
+        this.role = role;
+        this.password = password;
+        this.time_created = time_created;
+        this.last_updated = last_updated;
+    }
+
     public User(String role, String password,
                 LocalDateTime time_created,
                 LocalDateTime last_updated) {
