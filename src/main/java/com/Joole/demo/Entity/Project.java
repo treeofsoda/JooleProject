@@ -1,5 +1,8 @@
 package com.Joole.demo.Entity;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -31,6 +34,7 @@ public class Project {
 //            nullable = false,
 //            columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
 //    )
+    @CreatedDate
     private LocalDateTime time_created;
 
 //    @Column(
@@ -38,6 +42,7 @@ public class Project {
 //            nullable = false,
 //            columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
 //    )
+    @LastModifiedDate
     private LocalDateTime last_updated;
 
     @ManyToOne
