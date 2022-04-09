@@ -1,5 +1,8 @@
 package com.Joole.demo.Entity;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
@@ -54,6 +57,7 @@ public class Product {
 //            nullable = false,
 //            columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
 //    )
+    @CreatedDate
     private LocalDateTime time_created;
 
 //    @Column(
@@ -61,10 +65,11 @@ public class Product {
 //            nullable = false,
 //            columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
 //    )
+    @LastModifiedDate
     private LocalDateTime last_updated;
 
     @OneToMany(
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             mappedBy = "product"
     )
     private List<ProjectProduct> project_products = new ArrayList<>();

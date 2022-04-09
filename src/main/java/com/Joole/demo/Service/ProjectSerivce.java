@@ -1,18 +1,17 @@
 package com.Joole.demo.Service;
 
-import com.Joole.demo.Entity.Product;
+import com.Joole.demo.Entity.Project;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface ProductService {
-
+public interface ProjectSerivce {
     @Transactional
-    Product Create();
+    Project Create();
 
-    Product findByOneId(Long id);
+    Project findByOneId(Long id);
 
     String readAll();
 
-    Product Update(Product product);
+    Project Update(Project project);
 
     void Delete(Long id);
 }

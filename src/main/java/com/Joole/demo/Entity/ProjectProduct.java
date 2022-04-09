@@ -1,6 +1,8 @@
 package com.Joole.demo.Entity;
 
 
+import org.springframework.data.annotation.CreatedDate;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -37,6 +39,7 @@ public class ProjectProduct {
 //            nullable = false,
 //            columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
 //    )
+    @CreatedDate
     private LocalDateTime time_created;
 
     public ProjectProduct(ProjectProductId PRid,
