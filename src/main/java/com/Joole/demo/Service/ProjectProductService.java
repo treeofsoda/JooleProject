@@ -4,9 +4,9 @@ import com.Joole.demo.Entity.Project;
 import com.Joole.demo.Entity.ProjectProduct;
 
 public interface ProjectProductService {
-    ProjectProduct Create();
+    ProjectProduct Create(ProjectProduct projectProduct);
 
-    ProjectProduct findByOneId(Long id);
+    ProjectProduct findByOneId(int id);
 
     String readAll();
 

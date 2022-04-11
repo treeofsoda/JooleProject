@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "technical_detail")
 public class TechnicalDetail {
     @Id
-    private Long id;
+    private int id;
 
     @OneToOne
     @JoinColumn(
@@ -21,16 +21,16 @@ public class TechnicalDetail {
     public TechnicalDetail() {
     }
 
-    public TechnicalDetail(Long id, Product product) {
+    public TechnicalDetail(int id, Product product) {
         this.id = id;
         this.product = product;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

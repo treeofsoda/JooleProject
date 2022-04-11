@@ -9,12 +9,12 @@ import java.util.Objects;
 public class ProjectProductId implements Serializable {
 
     @Column(name = "project_id")
-    private Long projectId;
+    private int projectId;
 
     @Column(name = "resource_id")
-    private Long resourceId;
+    private int resourceId;
 
-    public ProjectProductId(Long projectId, Long resourceId) {
+    public ProjectProductId(int projectId, int resourceId) {
         this.projectId = projectId;
         this.resourceId = resourceId;
     }
@@ -22,19 +22,19 @@ public class ProjectProductId implements Serializable {
     public ProjectProductId() {
     }
 
-    public Long getProjectId() {
+    public int getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(Long projectId) {
+    public void setProjectId(int projectId) {
         this.projectId = projectId;
     }
 
-    public Long getProductId() {
+    public int getProductId() {
         return resourceId;
     }
 
-    public void setProductId(Long resourceId) {
+    public void setProductId(int resourceId) {
         this.resourceId = resourceId;
     }
 
