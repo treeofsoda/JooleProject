@@ -27,7 +27,7 @@ class ProductRepositoryTest {
                         LocalDateTime.of(2000, 1, 1, 0, 0)
 
                 );
-                random_product1.setResource_id(1990123456789L);
+                random_product1.setResource_id(199012345);
                 productRepository.save(random_product1);
                 Assertions.assertEquals(null, random_product1);
     }

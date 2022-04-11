@@ -19,22 +19,10 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     @Transactional
-    public Product Create(){
-        Product product = new Product(
-                1990L,
-                "no brand",
-                "Not certificated",
-                LocalDateTime.now(),
-                LocalDateTime.of(2000, 1, 1, 0, 0)
-        );
-        product.setResource_id(145L);
-        productRepository.save(product);
-        return product;
-    }
-
+    public Product create(Product product){ return productRepository.save(product); }
 
     @Override
-    public Product findByOneId(Long id) {
+    public Product findByOneId(int id) {
         return productRepository.findById(id).orElse(null);
     }
 
@@ -45,13 +33,12 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    public Product Update(Product product) {
+    public Product update(Product product) {
         return productRepository.save(product);
     }
 
-
     @Override
-    public void Delete(Long id) {
+    public void delete(int id) {
         productRepository.deleteById(id);
     }
 }

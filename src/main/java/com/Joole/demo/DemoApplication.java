@@ -12,25 +12,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.time.LocalDateTime;
 
 @SpringBootApplication
-public class DemoApplication implements CommandLineRunner {
+public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-	}
-
-	@Autowired
-	private ProductRepository productRepository;
-
-	@Override
-	public void run(String... args) throws Exception {
-		Product product = new Product(
-				1990L,
-				"no brand",
-				"Not certificated",
-				LocalDateTime.now(),
-				LocalDateTime.of(2000, 1, 1, 0, 0)
-		);
-		product.setResource_id(1234L);
-		productRepository.save(product);
 	}
 }

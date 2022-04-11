@@ -7,14 +7,14 @@ import java.util.List;
 
 public interface ProductService {
 
-    @Transactional
-    Product Create();
+    //@Transactional
+    Product create(Product product);
 
-    Product findByOneId(Long id);
+    Product findByOneId(int id);
 
     List<Product> readAll();
 
-    Product Update(Product product);
+    Product update(Product product);
 
-    void Delete(Long id);
+    void delete(int id);
 }

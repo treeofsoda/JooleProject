@@ -27,7 +27,7 @@ public class Project {
 //            name = "project_id",
 //            updatable = false
 //    )
-    private Long project_id;
+    private int project_id;
 
 //    @Column(
 //            name = "time_created",
@@ -65,17 +65,21 @@ public class Project {
     public Project() {
     }
 
+    public Project(int project_id) {
+        this.project_id = project_id;
+    }
+
     public Project(LocalDateTime time_created,
                    LocalDateTime last_updated) {
         this.time_created = time_created;
         this.last_updated = last_updated;
     }
 
-    public Long getProject_id() {
+    public int getProject_id() {
         return project_id;
     }
 
-    public void setProject_id(Long project_id) {
+    public void setProject_id(int project_id) {
         this.project_id = project_id;
     }
 

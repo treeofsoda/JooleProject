@@ -28,7 +28,7 @@ public class Product {
 //    @Column(
 //            name = "resource_id"
 //    )
-    private Long resource_id;
+    private int resource_id;
 
 //    @Column(
 //            name = "Model_year",
@@ -77,7 +77,12 @@ public class Product {
     @OneToOne(cascade = CascadeType.ALL)
     private TechnicalDetail technicalDetail;
 
+    public Product() {
+    }
 
+    public Product(int resource_id) {
+        this.resource_id = resource_id;
+    }
 
     public Product(Long model_year, String brand,
                    String certification, LocalDateTime time_created,
@@ -89,15 +94,14 @@ public class Product {
         this.last_updated = last_updated;
     }
 
-    public Product() {
-    }
 
 
-    public Long getResource_id() {
+
+    public int getResource_id() {
         return resource_id;
     }
 
-    public void setResource_id(Long resource_id) {
+    public void setResource_id(int resource_id) {
         this.resource_id = resource_id;
     }
 
