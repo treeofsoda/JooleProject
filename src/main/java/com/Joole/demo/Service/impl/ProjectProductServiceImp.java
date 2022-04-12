@@ -1,4 +1,48 @@
 package com.Joole.demo.Service.impl;
 
-public class ProjectProductServiceImp {
+import com.Joole.demo.Entity.ProjectProduct;
+import com.Joole.demo.Entity.ProjectProductId;
+import com.Joole.demo.Repository.ProjectProductRepository;
+import com.Joole.demo.Service.ProjectProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+public class ProjectProductServiceImp implements ProjectProductService {
+    @Autowired
+    private ProjectProductRepository projectProductRepository;
+
+    @Override
+    @Transactional
+    public ProjectProduct create(ProjectProduct projectProduct){
+        return projectProductRepository.save(projectProduct);
+    }
+
+
+    @Override
+    public ProjectProduct findByOneId(ProjectProductId id) {
+        return projectProductRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<ProjectProduct> readAll(){
+        List<ProjectProduct> list = projectProductRepository.findAll();
+        return list;
+    }
+
+    @Override
+    @Transactional
+    public ProjectProduct update(ProjectProduct projectProduct) {
+        return projectProductRepository.save(projectProduct);
+    }
+
+
+    @Override
+    @Transactional
+    public void delete(ProjectProductId id) {
+        projectProductRepository.deleteById(id);
+    }
 }

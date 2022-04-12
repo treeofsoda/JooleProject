@@ -25,7 +25,7 @@ public class ProductServiceTest {
                 LocalDateTime.of(2000, 1, 1, 0, 0)
 
         );
-        random_product1.setResource_id(199012345);
+        random_product1.setResource_id(45);
         productServiceImp.create(random_product1);
     }
 }

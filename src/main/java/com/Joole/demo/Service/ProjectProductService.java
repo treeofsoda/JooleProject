@@ -2,15 +2,21 @@ package com.Joole.demo.Service;
 
 import com.Joole.demo.Entity.Project;
 import com.Joole.demo.Entity.ProjectProduct;
+import com.Joole.demo.Entity.ProjectProductId;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 public interface ProjectProductService {
-    ProjectProduct Create(ProjectProduct projectProduct);
 
-    ProjectProduct findByOneId(int id);
+    @Transactional
+    ProjectProduct create(ProjectProduct projectProduct);
 
-    String readAll();
+    ProjectProduct findByOneId(ProjectProductId id);
 
-    ProjectProduct Update(ProjectProduct projectProduct);
+    List<ProjectProduct> readAll();
 
-    void Delete(Long id);
+    ProjectProduct update(ProjectProduct projectProduct);
+
+    void delete(ProjectProductId id);
 }

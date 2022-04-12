@@ -33,11 +33,13 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
+    @Transactional
     public Product update(Product product) {
         return productRepository.save(product);
     }
 
     @Override
+    @Transactional
     public void delete(int id) {
         productRepository.deleteById(id);
     }

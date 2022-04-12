@@ -31,12 +31,14 @@ public class TechnicalDetailServiceImp implements TechnicalDetailService {
     }
 
     @Override
+    @Transactional
     public TechnicalDetail update(TechnicalDetail technicalDetail) {
         return technicalDetailRepository.save(technicalDetail);
     }
 
 
     @Override
+    @Transactional
     public void delete(int id) {
         technicalDetailRepository.deleteById(id);
     }

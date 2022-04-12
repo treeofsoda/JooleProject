@@ -57,7 +57,7 @@ public class Project {
     private User user;
 
     @OneToMany(
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            cascade = {CascadeType.MERGE},
             mappedBy = "project"
     )
     private List<ProjectProduct> project_products = new ArrayList<>();

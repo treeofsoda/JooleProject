@@ -13,7 +13,7 @@ public class ProjectProduct {
     @EmbeddedId
     private ProjectProductId PRid;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.MERGE)
     @MapsId("projectId")
     @JoinColumn(
             name = "project_id",
@@ -23,7 +23,7 @@ public class ProjectProduct {
     )
     private Project project;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.MERGE)
     @MapsId("resourceId")
     @JoinColumn(
             name = "resource_id",
@@ -34,7 +34,7 @@ public class ProjectProduct {
     private Product product;
 
 
-//    @Column(
+    //    @Column(
 //            name = "time_created",
 //            nullable = false,
 //            columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
@@ -43,9 +43,9 @@ public class ProjectProduct {
     private LocalDateTime time_created;
 
     public ProjectProduct(ProjectProductId PRid,
-                           Project project,
-                           Product product,
-                           LocalDateTime time_created) {
+                          Project project,
+                          Product product,
+                          LocalDateTime time_created) {
         this.PRid = PRid;
         this.project = project;
         this.product = product;
@@ -53,14 +53,17 @@ public class ProjectProduct {
     }
 
     public ProjectProduct(Project project,
-                           Product product,
-                           LocalDateTime time_created) {
+                          Product product,
+                          LocalDateTime time_created) {
         this.project = project;
         this.product = product;
         this.time_created = time_created;
     }
 
     public ProjectProduct() {
+    }
+
+    public ProjectProduct(Project projectTemp, Product productTemp) {
     }
 
     public ProjectProductId getPRid() {
