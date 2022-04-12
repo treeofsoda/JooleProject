@@ -8,6 +8,9 @@ import java.util.Objects;
 @Embeddable
 public class ProjectProductId implements Serializable {
 
+    @Column(name = "PRid")
+    private int PRid;
+
     @Column(name = "project_id")
     private int projectId;
 
@@ -20,6 +23,22 @@ public class ProjectProductId implements Serializable {
     }
 
     public ProjectProductId() {
+    }
+
+    public int getPRid() {
+        return PRid;
+    }
+
+    public void setPRid(int PRid) {
+        this.PRid = PRid;
+    }
+
+    public int getResourceId() {
+        return resourceId;
+    }
+
+    public void setResourceId(int resourceId) {
+        this.resourceId = resourceId;
     }
 
     public int getProjectId() {

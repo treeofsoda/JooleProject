@@ -8,7 +8,7 @@ public class TechnicalDetail {
     @Id
     private int id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "technical_detail_id",
             referencedColumnName = "technical_detail_id",

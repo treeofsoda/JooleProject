@@ -34,12 +34,14 @@ public class ProjectServicelmp implements ProjectService {
     }
 
     @Override
+    @Transactional
     public Project update(Project project) {
         return projectRepository.save(project);
     }
 
 
     @Override
+    @Transactional
     public void delete(int id) {
         projectRepository.deleteById(id);
     }

@@ -50,7 +50,8 @@ public class ProductController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> Update(@RequestBody Product productToUpdate){
+    public ResponseEntity<?> Update(@RequestBody Product productToUpdate, @RequestParam(name = "resource_id") int resource_id){
+
         try {
             productService.create(productToUpdate);
         } catch (Exception e) {

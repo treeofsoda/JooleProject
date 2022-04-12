@@ -64,7 +64,7 @@ public class User {
     private LocalDateTime last_updated;
 
     @OneToMany(
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            cascade = {CascadeType.MERGE},
             mappedBy = "user"
     )
     private List<Project> projects = new ArrayList<>();
@@ -91,6 +91,9 @@ public class User {
     }
 
     public User() {
+    }
+
+    public User(int user_name) {
     }
 
     public String getUser_name() {

@@ -69,7 +69,7 @@ public class Product {
     private LocalDateTime last_updated;
 
     @OneToMany(
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            cascade = {CascadeType.MERGE},
             mappedBy = "product"
     )
     private List<ProjectProduct> project_products = new ArrayList<>();
