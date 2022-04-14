@@ -1,7 +1,6 @@
 package com.Joole.demo.Service.impl;
 
 import com.Joole.demo.Entity.ProjectProduct;
-import com.Joole.demo.Entity.ProjectProductId;
 import com.Joole.demo.Repository.ProjectProductRepository;
 import com.Joole.demo.Service.ProjectProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class ProjectProductServiceImp implements ProjectProductService {
 
 
     @Override
-    public ProjectProduct findByOneId(ProjectProductId id) {
+    public ProjectProduct findByOneId(int id) {
         return projectProductRepository.findById(id).orElse(null);
     }
 
@@ -42,7 +41,7 @@ public class ProjectProductServiceImp implements ProjectProductService {
 
     @Override
     @Transactional
-    public void delete(ProjectProductId id) {
+    public void delete(int id) {
         projectProductRepository.deleteById(id);
     }
 }

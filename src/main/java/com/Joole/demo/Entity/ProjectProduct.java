@@ -10,16 +10,14 @@ import java.time.LocalDateTime;
 @Entity(name = "Project_Product")
 @Table(name = "project_product")
 public class ProjectProduct {
-    @EmbeddedId
-    private ProjectProductId PRid;
+    @Id
+    private int PRid;
 
     @ManyToOne (cascade = CascadeType.MERGE)
     @MapsId("projectId")
     @JoinColumn(
             name = "project_id",
-            foreignKey = @ForeignKey(
-                    name = "project_product_project_id_fk"
-            )
+            referencedColumnName="project_id"
     )
     private Project project;
 
@@ -27,12 +25,9 @@ public class ProjectProduct {
     @MapsId("resourceId")
     @JoinColumn(
             name = "resource_id",
-            foreignKey = @ForeignKey(
-                    name = "project_product_resource_id_fk"
-            )
+            referencedColumnName="resource_id"
     )
     private Product product;
-
 
     //    @Column(
 //            name = "time_created",
@@ -42,7 +37,7 @@ public class ProjectProduct {
     @CreatedDate
     private LocalDateTime time_created;
 
-    public ProjectProduct(ProjectProductId PRid,
+    public ProjectProduct(int PRid,
                           Project project,
                           Product product,
                           LocalDateTime time_created) {
@@ -66,11 +61,11 @@ public class ProjectProduct {
     public ProjectProduct(Project projectTemp, Product productTemp) {
     }
 
-    public ProjectProductId getPRid() {
+    public int getPRid() {
         return PRid;
     }
 
-    public void setPRid(ProjectProductId PRid) {
+    public void setPRid(int PRid) {
         this.PRid = PRid;
     }
 

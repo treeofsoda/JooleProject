@@ -3,7 +3,6 @@ package com.Joole.demo.Controller;
 import com.Joole.demo.Entity.Product;
 import com.Joole.demo.Entity.Project;
 import com.Joole.demo.Entity.ProjectProduct;
-import com.Joole.demo.Entity.ProjectProductId;
 import com.Joole.demo.Service.ProductService;
 import com.Joole.demo.Service.ProjectProductService;
 import com.Joole.demo.Service.ProjectService;
@@ -12,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 
