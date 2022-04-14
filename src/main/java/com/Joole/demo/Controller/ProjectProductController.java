@@ -24,20 +24,20 @@ public class ProjectProductController {
     @Autowired
     private ProductService productService;
 
-//    @PostMapping("/addProduct/{projectId}/Project/{resourceId}")
-    @GetMapping("/addProduct/{resource_id}/intoProject/{project_id}")
+    private ProjectProduct projectProductToAdd;
+    @PostMapping("/addProduct/{resource_id}/intoProject/{project_id}")
     public ResponseEntity<?> Create(@PathVariable int resource_id, @PathVariable int project_id) {
         Project projectTemp;
         Product productTemp;
         try {
             projectTemp = projectService.findByOneId(project_id);
             productTemp = productService.findByOneId(resource_id);
-            ProjectProduct projectProductToAdd = new ProjectProduct(projectTemp, productTemp);
+            projectProductToAdd = new ProjectProduct(projectTemp, productTemp);
             projectProductService.create(projectProductToAdd);
         } catch (Exception e) {
             return new ResponseEntity<>("{\"error\":\""+e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(projectProductToAdd.toString(), HttpStatus.CREATED);
     }
 
 //    @PostMapping("/findOne")
@@ -57,7 +57,13 @@ public class ProjectProductController {
         } catch (Exception e) {
             return new ResponseEntity<>("{\"error\":\"cannot read!\"}", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(projectProductList.toString(), HttpStatus.OK);
+        String returnString = "[";
+        for (ProjectProduct pp:projectProductList) {
+            returnString += "\n";
+            returnString += pp.toString();
+        }
+        returnString += "\n]";
+        return new ResponseEntity<>(returnString.toString(), HttpStatus.OK);
     }
 
     @PutMapping("/update")
@@ -71,14 +77,13 @@ public class ProjectProductController {
         return new ResponseEntity<>(projectProductToUpdate,HttpStatus.OK);
     }
 
-//    @DeleteMapping("/deleteOne")
-//    public ResponseEntity<?> Delete(@RequestParam("PRid")
-//                                                ProjectProductId PRid){
-//        ProjectProduct projectProductDelete = projectProductService.findByOneId(PRid);
-//        if (projectProductDelete == null) {
-//            return new ResponseEntity<>("{\"error\":\"projectproduct not found!\"}", HttpStatus.BAD_REQUEST);
-//        }
-//        projectProductService.delete(PRid);
-//        return new ResponseEntity<>(projectProductDelete.toString() + "is deleted", HttpStatus.OK);
-//    }
+    @DeleteMapping("/deleteOne")
+    public ResponseEntity<?> Delete(@RequestParam("PRid") int PRid){
+        ProjectProduct projectProductDelete = projectProductService.findByOneId(PRid);
+        if (projectProductDelete == null) {
+            return new ResponseEntity<>("{\"error\":\"projectproduct not found!\"}", HttpStatus.BAD_REQUEST);
+        }
+        projectProductService.delete(PRid);
+        return new ResponseEntity<>(projectProductDelete.toString() + "is deleted", HttpStatus.OK);
+    }
 }

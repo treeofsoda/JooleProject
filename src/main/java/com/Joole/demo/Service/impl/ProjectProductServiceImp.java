@@ -34,13 +34,6 @@ public class ProjectProductServiceImp implements ProjectProductService {
 
     @Override
     @Transactional
-    public ProjectProduct update(ProjectProduct projectProduct) {
-        return projectProductRepository.save(projectProduct);
-    }
-
-
-    @Override
-    @Transactional
     public void delete(int id) {
         projectProductRepository.deleteById(id);
     }

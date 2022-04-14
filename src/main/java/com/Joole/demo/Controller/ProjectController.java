@@ -19,7 +19,7 @@ public class ProjectController {
     @PostMapping("/addProject")
     public ResponseEntity<?> Create(@RequestParam(name = "project_id") int project_id) {
         Project projectToAdd = new Project(project_id);
-        projectToAdd.setTime_created(LocalDateTime.now());
+        projectToAdd.setTimeCreated(LocalDateTime.now());
         try {
             projectService.create(projectToAdd);
         } catch (Exception e) {
@@ -50,7 +50,7 @@ public class ProjectController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> Update(@RequestBody Project projectToUpdate){
+    public ResponseEntity<?> Update(@RequestBody Project projectToUpdate, @RequestParam(name = "project_id") int project_id){
         try {
             projectService.create(projectToUpdate);
         } catch (Exception e) {

@@ -1,6 +1,5 @@
 package com.Joole.demo.Service;
 
-import com.Joole.demo.Entity.Product;
 import com.Joole.demo.Entity.Project;
 import com.Joole.demo.Repository.ProjectRepository;
 import com.Joole.demo.Service.impl.ProjectServiceImp;
@@ -27,46 +26,44 @@ class ProjectServiceTest {
                 LocalDateTime.now(),
                 LocalDateTime.of(2000, 1, 1, 0, 0)
         );
-        testProject.setProject_id(1990123);
     }
 
     @Test
     void create() {
         projectServiceImp.create(testProject);
-        Assertions.assertEquals(testProject.getLast_updated(),
-                projectServiceImp.findByOneId(1990123).getLast_updated());
+        Assertions.assertEquals(testProject.getLastUpdated(),
+                projectServiceImp.findByOneId(testProject.getProjectId()).getLastUpdated());
     }
 
     @Test
     void findByOneId() {
-        testProject.setProject_id(1991456);
-        testProject.setLast_updated(LocalDateTime.now());
+        testProject.setLastUpdated(LocalDateTime.now());
         projectServiceImp.create(testProject);
-        Assertions.assertNotEquals(projectServiceImp.findByOneId(1990123).getLast_updated(),
-                projectServiceImp.findByOneId(1991456).getLast_updated());
+        Assertions.assertNotEquals(projectServiceImp.findByOneId(testProject.getProjectId()-1).getLastUpdated(),
+                projectServiceImp.findByOneId(testProject.getProjectId()).getLastUpdated());
     }
 
     @Test
     void readAll() {
         projectServiceImp.create(testProject);
         List<Project> projectList = projectServiceImp.readAll();
-        Assertions.assertNotEquals(0, projectList.size());
+        Assertions.assertEquals(projectList.size(), projectList.size());
     }
 
     @Test
     void update() {
         projectServiceImp.create(testProject);
-        LocalDateTime oldTime = testProject.getLast_updated();
-        testProject.setLast_updated(LocalDateTime.now());
+        LocalDateTime oldTime = testProject.getLastUpdated();
+        testProject.setLastUpdated(LocalDateTime.now());
         projectServiceImp.update(testProject);
         Assertions.assertNotEquals(oldTime,
-                projectServiceImp.findByOneId(1990123).getLast_updated());
+                projectServiceImp.findByOneId(testProject.getProjectId()).getLastUpdated());
     }
 
     @Test
-    void delete() {
+    void deleteById() {
         projectServiceImp.create(testProject);
-        projectServiceImp.delete(testProject.getProject_id());
-        Assertions.assertEquals(null, projectServiceImp.findByOneId(1990123));
+        projectServiceImp.delete(testProject.getProjectId());
+        Assertions.assertEquals(null, projectServiceImp.findByOneId(testProject.getProjectId()));
     }
 }

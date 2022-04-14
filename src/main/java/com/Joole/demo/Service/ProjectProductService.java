@@ -14,7 +14,5 @@ public interface ProjectProductService {
 
     List<ProjectProduct> readAll();
 
-    ProjectProduct update(ProjectProduct projectProduct);
-
     void delete(int id);
 }

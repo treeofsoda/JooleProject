@@ -4,7 +4,9 @@ import com.Joole.demo.Entity.Product;
 import com.Joole.demo.Entity.Project;
 import com.Joole.demo.Entity.ProjectProduct;
 import com.Joole.demo.Repository.ProjectProductRepository;
+import com.Joole.demo.Service.impl.ProductServiceImp;
 import com.Joole.demo.Service.impl.ProjectProductServiceImp;
+import com.Joole.demo.Service.impl.ProjectServiceImp;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,9 +18,13 @@ import java.time.LocalDateTime;
 @SpringBootTest
 class ProjectProductServiceTest {
     @Autowired
-    ProjectProductServiceImp projectProductServiceImp;
+    ProjectProductServiceImp projectProductService;
     @Autowired
     ProjectProductRepository projectProductRepository;
+    @Autowired
+    ProjectServiceImp projectService;
+    @Autowired
+    ProductServiceImp productService;
 
     private Project testProject;
     private Product testProduct;
@@ -30,8 +36,6 @@ class ProjectProductServiceTest {
                 LocalDateTime.now(),
                 LocalDateTime.of(2000, 1, 1, 0, 0)
         );
-        testProject.setProject_id(19903445);
-
         this.testProduct = new Product(
                 1990L,
                 "no brand",
@@ -39,34 +43,37 @@ class ProjectProductServiceTest {
                 LocalDateTime.now(),
                 LocalDateTime.of(2000, 1, 1, 0, 0)
         );
-        testProduct.setResource_id(199034);
-
 
         this.testprojectProduct = new ProjectProduct();
         testprojectProduct.setProject(testProject);
         testprojectProduct.setProduct(testProduct);
-        testprojectProduct.setPRid(123455);
+        projectService.create(testProject);
+        productService.create(testProduct);
     }
+
     @Test
     void create() {
-        projectProductServiceImp.create(testprojectProduct);
-        Assertions.assertEquals(199034, testprojectProduct.getProduct().getResource_id());
+        projectProductService.create(testprojectProduct);
+        Assertions.assertEquals(testProject.getProjectId(), testprojectProduct.getProject().getProjectId());
     }
 
     @Test
     void findByOneId() {
-
+        projectProductService.create(testprojectProduct);
+        Assertions.assertEquals(projectProductService.findByOneId(testprojectProduct.getPRid()).getProduct().getResourceId(),
+                testprojectProduct.getProduct().getResourceId());
     }
 
     @Test
     void readAll() {
+        projectProductService.create(testprojectProduct);
+        ProjectProduct testprojectProduct2 = new ProjectProduct();
+        projectProductService.create(testprojectProduct2);
+        Assertions.assertTrue(projectProductService.readAll().size() >= 2);
     }
 
     @Test
-    void update() {
-    }
+    void deleteByProjectAndProduct() {
 
-    @Test
-    void delete() {
     }
 }

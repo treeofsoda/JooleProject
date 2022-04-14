@@ -6,15 +6,19 @@ import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import static javax.persistence.GenerationType.IDENTITY;
+import static javax.persistence.GenerationType.SEQUENCE;
+
 
 @Entity(name = "Project_Product")
 @Table(name = "project_product")
 public class ProjectProduct {
     @Id
-    private int PRid;
+    @GeneratedValue(strategy = IDENTITY)
+    private int prid;
 
     @ManyToOne (cascade = CascadeType.MERGE)
-    @MapsId("projectId")
+//    @MapsId("projectId")
     @JoinColumn(
             name = "project_id",
             referencedColumnName="project_id"
@@ -22,7 +26,7 @@ public class ProjectProduct {
     private Project project;
 
     @ManyToOne (cascade = CascadeType.MERGE)
-    @MapsId("resourceId")
+//    @MapsId("resourceId")
     @JoinColumn(
             name = "resource_id",
             referencedColumnName="resource_id"
@@ -35,38 +39,40 @@ public class ProjectProduct {
 //            columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
 //    )
     @CreatedDate
-    private LocalDateTime time_created;
+    private LocalDateTime timeCreated;
 
-    public ProjectProduct(int PRid,
+    public ProjectProduct(int prid,
                           Project project,
                           Product product,
-                          LocalDateTime time_created) {
-        this.PRid = PRid;
+                          LocalDateTime timeCreated) {
+        this.prid = prid;
         this.project = project;
         this.product = product;
-        this.time_created = time_created;
+        this.timeCreated = timeCreated;
     }
 
     public ProjectProduct(Project project,
                           Product product,
-                          LocalDateTime time_created) {
+                          LocalDateTime timeCreated) {
         this.project = project;
         this.product = product;
-        this.time_created = time_created;
+        this.timeCreated = timeCreated;
+    }
+
+    public ProjectProduct(Project project, Product product) {
+        this.project = project;
+        this.product = product;
     }
 
     public ProjectProduct() {
     }
 
-    public ProjectProduct(Project projectTemp, Product productTemp) {
-    }
-
     public int getPRid() {
-        return PRid;
+        return prid;
     }
 
     public void setPRid(int PRid) {
-        this.PRid = PRid;
+        this.prid = PRid;
     }
 
     public Project getProject() {
@@ -86,10 +92,20 @@ public class ProjectProduct {
     }
 
     public LocalDateTime getTime_created() {
-        return time_created;
+        return timeCreated;
     }
 
     public void setTime_created(LocalDateTime time_created) {
-        this.time_created = time_created;
+        this.timeCreated = time_created;
+    }
+
+    @Override
+    public String toString() {
+        String project_id = project == null ? null : Integer.toString(project.getProjectId());
+        String product_id = product == null ? null : Integer.toString(product.getResourceId());
+        return "ProjectProduct{" +
+                "PRid = " + prid +
+                " project_id = " + project_id +
+                " resource_id = " + product_id + "}";
     }
 }

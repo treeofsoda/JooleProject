@@ -19,7 +19,7 @@ public class ProductController {
     @PostMapping("/addProduct")
     public ResponseEntity<?> Create(@RequestParam(name = "resource_id") int resource_id) {
         Product productToAdd = new Product(resource_id);
-        productToAdd.setTime_created(LocalDateTime.now());
+        productToAdd.setTimeCreated(LocalDateTime.now());
         try {
             productService.create(productToAdd);
         } catch (Exception e) {
@@ -51,7 +51,6 @@ public class ProductController {
 
     @PutMapping("/update")
     public ResponseEntity<?> Update(@RequestBody Product productToUpdate, @RequestParam(name = "resource_id") int resource_id){
-
         try {
             productService.create(productToUpdate);
         } catch (Exception e) {

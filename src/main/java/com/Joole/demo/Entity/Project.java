@@ -8,42 +8,31 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.GenerationType.IDENTITY;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Project")
 @Table(name = "project")
 public class Project {
     @Id
-//    @SequenceGenerator(
-//            name = "project_sequence",
-//            sequenceName = "project_sequence",
-//            allocationSize = 1
-//    )
-//    @GeneratedValue(
-//            strategy = SEQUENCE,
-//            generator = "project_sequence"
-//    )
-//    @Column(
-//            name = "project_id",
-//            updatable = false
-//    )
-    private int project_id;
+    @GeneratedValue(strategy = IDENTITY)
+    private int projectId;
 
-//    @Column(
+    //    @Column(
 //            name = "time_created",
 //            nullable = false,
 //            columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
 //    )
     @CreatedDate
-    private LocalDateTime time_created;
+    private LocalDateTime timeCreated;
 
-//    @Column(
+    //    @Column(
 //            name = "last_updated",
 //            nullable = false,
 //            columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
 //    )
     @LastModifiedDate
-    private LocalDateTime last_updated;
+    private LocalDateTime lastUpdated;
 
     @ManyToOne
     @JoinColumn(
@@ -60,77 +49,77 @@ public class Project {
             cascade = {CascadeType.MERGE},
             mappedBy = "project"
     )
-    private List<ProjectProduct> project_products = new ArrayList<>();
+    private List<ProjectProduct> projectProducts = new ArrayList<>();
 
     public Project() {
     }
 
     public Project(int project_id) {
-        this.project_id = project_id;
+        this.projectId = project_id;
     }
 
     public Project(LocalDateTime time_created,
                    LocalDateTime last_updated) {
-        this.time_created = time_created;
-        this.last_updated = last_updated;
+        this.timeCreated = time_created;
+        this.lastUpdated = last_updated;
     }
 
-    public int getProject_id() {
-        return project_id;
+    public int getProjectId() {
+        return projectId;
     }
 
-    public void setProject_id(int project_id) {
-        this.project_id = project_id;
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
-    public LocalDateTime getTime_created() {
-        return time_created;
+    public LocalDateTime getTimeCreated() {
+        return timeCreated;
     }
 
-    public void setTime_created(LocalDateTime time_created) {
-        this.time_created = time_created;
+    public void setTimeCreated(LocalDateTime timeCreated) {
+        this.timeCreated = timeCreated;
     }
 
-    public LocalDateTime getLast_updated() {
-        return last_updated;
+    public LocalDateTime getLastUpdated() {
+        return lastUpdated;
     }
 
-    public void setLast_updated(LocalDateTime last_updated) {
-        this.last_updated = last_updated;
+    public void setLastUpdated(LocalDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user){
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public void addProject_Product(ProjectProduct project_product) {
-        if (!this.project_products.contains(project_product)) {
-            this.project_products.add(project_product);
-            project_product.setProject(this);
+    public void addProject_Product(ProjectProduct projectProduct) {
+        if (!this.projectProducts.contains(projectProduct)) {
+            this.projectProducts.add(projectProduct);
+            projectProduct.setProject(this);
         }
     }
 
-    public void removeProject_Product(ProjectProduct project_product) {
-        if (this.project_products.contains(project_product)) {
-            this.project_products.remove(project_product);
-            project_product.setProject(null);
+    public void removeProject_Product(ProjectProduct projectProduct) {
+        if (this.projectProducts.contains(projectProduct)) {
+            this.projectProducts.remove(projectProduct);
+            projectProduct.setProject(null);
         }
     }
 
     public List<ProjectProduct> getProject_Product() {
-        return project_products;
+        return projectProducts;
     }
 
     @Override
     public String toString() {
         return "Project{" +
-                "project_id=" + project_id +
-                ", time_created=" + time_created +
-                ", last_updated=" + last_updated +
+                "project_id=" + projectId +
+                ", time_created=" + timeCreated +
+                ", last_updated=" + lastUpdated +
                 '}';
     }
 }

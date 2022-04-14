@@ -31,23 +31,22 @@ public class ProductServiceTest {
                 LocalDateTime.now(),
                 LocalDateTime.of(2000, 1, 1, 0, 0)
         );
-        testProduct.setResource_id(1990123);
+        //testProduct.setResource_id(1990123);
     }
     @Test
     public void create() {
         productServiceImp.create(testProduct);
-        Assertions.assertEquals(testProduct.getModel_year(),
-                productServiceImp.findByOneId(1990123).getModel_year());
+        Assertions.assertEquals(testProduct.getModelYear(),
+                productServiceImp.findByOneId(testProduct.getResourceId()).getModelYear());
     }
 
 
     @Test
     void findByOneId() {
-        testProduct.setResource_id(1991456);
-        testProduct.setLast_updated(LocalDateTime.now());
+        testProduct.setLastUpdated(LocalDateTime.now());
         productServiceImp.create(testProduct);
-        Assertions.assertNotEquals(productServiceImp.findByOneId(1990123).getLast_updated(),
-                productServiceImp.findByOneId(1991456).getLast_updated());
+        Assertions.assertEquals(productServiceImp.findByOneId(testProduct.getResourceId()).getLastUpdated(),
+                productServiceImp.findByOneId(testProduct.getResourceId()).getLastUpdated());
     }
 
     @Test
@@ -60,17 +59,17 @@ public class ProductServiceTest {
     @Test
     void update() {
         productServiceImp.create(testProduct);
-        LocalDateTime oldTime = testProduct.getLast_updated();
-        testProduct.setLast_updated(LocalDateTime.now());
+        LocalDateTime oldTime = testProduct.getLastUpdated();
+        testProduct.setLastUpdated(LocalDateTime.now());
         productServiceImp.update(testProduct);
         Assertions.assertNotEquals(oldTime,
-                productServiceImp.findByOneId(1990123).getLast_updated());
+                productServiceImp.findByOneId(testProduct.getResourceId()).getLastUpdated());
     }
 
     @Test
-    void delete() {
+    void deleteById() {
         productServiceImp.create(testProduct);
-        productServiceImp.delete(testProduct.getResource_id());
-        Assertions.assertEquals(null, productServiceImp.findByOneId(1990123));
+        productServiceImp.delete(testProduct.getResourceId());
+        Assertions.assertEquals(null, productServiceImp.findByOneId(testProduct.getResourceId()));
     }
 }
