@@ -1,115 +1,77 @@
 package com.Joole.demo.Entity;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
-import java.util.ArrayList;
-import java.util.List;
+@Entity
+@Table(name = "Users")
+public class User implements Serializable {
 
-import static javax.persistence.GenerationType.SEQUENCE;
 
 
-@Entity(name = "User")
-@Table(name = "user")
-public class User {
     @Id
-//    @SequenceGenerator(
-//        name = "user_sequence",
-//        sequenceName = "user_sequence",
-//        allocationSize = 1
-//    )
-//    @GeneratedValue(
-//        strategy = SEQUENCE,
-//        generator = "user_sequence"
-//    )
+    @GeneratedValue
+    private Integer userId;
+
+    @Column(name = "username", unique = true, nullable = false,length = 256)
+    private String username;
 
 
-//    @Column(
-//            name = "user_name",
-//            nullable = false,
-//            columnDefinition = "TEXT"
-//    )
-    private String user_name;
-
-    @Column(
-            name = "role"
-//            nullable = false
-    )
-    private String role;
-
-    @Column(
-            name = "password",
-//            nullable = false,
-            columnDefinition = "TEXT"
-    )
+    @Column(name = "password")
     private String password;
 
-//    @Column(
-//            name = "time_created",
-//            nullable = false,
-//            columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
-//    )
+
     @CreatedDate
-    private LocalDateTime time_created;
+    private LocalDateTime timeCreate;
 
-//    @Column(
-//            name = "last_updated",
-//            nullable = false,
-//            columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
-//    )
     @LastModifiedDate
-    private LocalDateTime last_updated;
+    private LocalDateTime lastUpdated;
 
-    @OneToMany(
-            cascade = {CascadeType.MERGE},
-            mappedBy = "user"
-    )
-    private List<Project> projects = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
 
-    public User(String user_name, String role,
-                String password,
-                LocalDateTime time_created,
-                LocalDateTime last_updated) {
-        this.user_name = user_name;
+//    @Transient
+//    private String token;
+
+    public LocalDateTime getTimeCreate() {
+        return timeCreate;
+    }
+
+    public LocalDateTime getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setRole(Role role) {
         this.role = role;
-        this.password = password;
-        this.time_created = time_created;
-        this.last_updated = last_updated;
     }
 
-    public User(String role, String password,
-                LocalDateTime time_created,
-                LocalDateTime last_updated) {
+//    public void setToken(String token) {
+//        this.token = token;
+//    }
 
-        this.role = role;
-        this.password = password;
-        this.time_created = time_created;
-        this.last_updated = last_updated;
-    }
-
-    public User() {
-    }
-
-    public User(int user_name) {
-    }
-
-    public String getUser_name() {
-        return user_name;
-    }
-
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
-    }
-
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+//    public String getToken() {
+//        return token;
+//    }
+
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -120,48 +82,41 @@ public class User {
         this.password = password;
     }
 
-    public LocalDateTime getTime_created() {
-        return time_created;
+    //need default constructor for JSON Parsing
+    public User()
+    {
+
     }
 
-    public void setTime_created(LocalDateTime time_created) {
-        this.time_created = time_created;
+    public User(String username, String password) {
+        this.setUsername(username);
+        this.setPassword(password);
     }
 
-    public LocalDateTime getLast_updated() {
-        return last_updated;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setLast_updated(LocalDateTime last_updated) {
-        this.last_updated = last_updated;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public List<Project> getProject() {
-        return projects;
+    public void setTimeCreate(LocalDateTime timeCreate) {
+        this.timeCreate = timeCreate;
     }
 
-    public void addProject(Project project){
-        if(!this.projects.contains(project)){
-            this.projects.add(project);
-            project.setUser(this);
-        }
+    public void setLastUpdated(LocalDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
-
-    public void removeProject(Project project){
-        if(this.projects.contains(project))
-            this.projects.remove(project);
-            project.setUser(null);
-    }
-
 
     @Override
     public String toString() {
         return "User{" +
-                "user_name='" + user_name + '\'' +
+                "user_name='" + username + '\'' +
                 ", role='" + role + '\'' +
                 ", password='" + password + '\'' +
-                ", time_created=" + time_created +
-                ", last_updated=" + last_updated +
+                ", time_created=" + timeCreate +
+                ", last_updated=" + lastUpdated +
                 '}';
     }
 }

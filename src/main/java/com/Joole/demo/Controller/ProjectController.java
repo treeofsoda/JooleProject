@@ -17,8 +17,8 @@ public class ProjectController {
     private ProjectService projectService;
 
     @PostMapping("/addProject")
-    public ResponseEntity<?> Create(@RequestParam(name = "project_id") int project_id) {
-        Project projectToAdd = new Project(project_id);
+    public ResponseEntity<?> Create(int projectId) {
+        Project projectToAdd = new Project();
         projectToAdd.setTimeCreated(LocalDateTime.now());
         try {
             projectService.create(projectToAdd);
@@ -30,7 +30,7 @@ public class ProjectController {
     }
 
     @GetMapping("/findOne")
-    public ResponseEntity<?> findByOneId(@RequestParam(name = "project_id") int id){
+    public ResponseEntity<?> findByOneId(@RequestParam(name = "projectId") int id){
         Project projectToFind = projectService.findByOneId(id);
         if (projectToFind == null) {
             return new ResponseEntity<>("{\"error\":\"project not found!\"}", HttpStatus.BAD_REQUEST);
@@ -50,7 +50,7 @@ public class ProjectController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> Update(@RequestBody Project projectToUpdate, @RequestParam(name = "project_id") int project_id){
+    public ResponseEntity<?> Update(@RequestBody Project projectToUpdate, @RequestParam(name = "projectId") int projectId){
         try {
             projectService.create(projectToUpdate);
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class ProjectController {
     }
 
     @DeleteMapping("/deleteOne")
-    public ResponseEntity<?> Delete(@RequestParam("project_id") int id){
+    public ResponseEntity<?> Delete(@RequestParam("projectId") int id){
         Project projectToDelete = projectService.findByOneId(id);
         if (projectToDelete == null) {
             return new ResponseEntity<>("{\"error\":\"project not found!\"}", HttpStatus.BAD_REQUEST);

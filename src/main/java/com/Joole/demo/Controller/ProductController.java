@@ -17,8 +17,8 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/addProduct")
-    public ResponseEntity<?> Create(@RequestParam(name = "resource_id") int resource_id) {
-        Product productToAdd = new Product(resource_id);
+    public ResponseEntity<?> Create(@RequestParam(name = "resourceId") int resourceId) {
+        Product productToAdd = new Product(resourceId);
         productToAdd.setTimeCreated(LocalDateTime.now());
         try {
             productService.create(productToAdd);
@@ -30,7 +30,7 @@ public class ProductController {
     }
 
     @GetMapping("/findOne")
-    public ResponseEntity<?> findByOneId(@RequestParam(name = "resource_id") int id){
+    public ResponseEntity<?> findByOneId(@RequestParam(name = "resourceId") int id){
         Product productToFind = productService.findByOneId(id);
         if (productToFind == null) {
             return new ResponseEntity<>("{\"error\":\"product not found!\"}", HttpStatus.BAD_REQUEST);
@@ -50,7 +50,7 @@ public class ProductController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> Update(@RequestBody Product productToUpdate, @RequestParam(name = "resource_id") int resource_id){
+    public ResponseEntity<?> Update(@RequestBody Product productToUpdate, @RequestParam(name = "resourceId") int resourceId){
         try {
             productService.create(productToUpdate);
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/deleteOne")
-    public ResponseEntity<?> Delete(@RequestParam("resource_id") int id){
+    public ResponseEntity<?> Delete(@RequestParam("resourceId") int id){
         Product productToDelete = productService.findByOneId(id);
         if (productToDelete == null) {
             return new ResponseEntity<>("{\"error\":\"product not found!\"}", HttpStatus.BAD_REQUEST);

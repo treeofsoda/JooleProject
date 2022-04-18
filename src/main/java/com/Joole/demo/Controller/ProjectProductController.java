@@ -25,13 +25,13 @@ public class ProjectProductController {
     private ProductService productService;
 
     private ProjectProduct projectProductToAdd;
-    @PostMapping("/addProduct/{resource_id}/intoProject/{project_id}")
-    public ResponseEntity<?> Create(@PathVariable int resource_id, @PathVariable int project_id) {
+    @PostMapping("/addProduct/{resourceId}/intoProject/{projectId}")
+    public ResponseEntity<?> Create(@PathVariable int resourceId, @PathVariable int projectId) {
         Project projectTemp;
         Product productTemp;
         try {
-            projectTemp = projectService.findByOneId(project_id);
-            productTemp = productService.findByOneId(resource_id);
+            projectTemp = projectService.findByOneId(projectId);
+            productTemp = productService.findByOneId(resourceId);
             projectProductToAdd = new ProjectProduct(projectTemp, productTemp);
             projectProductService.create(projectProductToAdd);
         } catch (Exception e) {

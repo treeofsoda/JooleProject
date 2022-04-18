@@ -1,24 +1,21 @@
 package com.Joole.demo.Service;
 
-import com.Joole.demo.Entity.Project;
-import com.Joole.demo.Entity.User;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
+import com.Joole.demo.Entity.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface UserService {
 
+    User saveUser(User user);
 
-    @Transactional
-    User Create(User user);
+    User findByUsername(String username);
 
-    User findByOneId(String userName);
+    List<User> findAllUsers();
 
-    List<User> readAll();
-
-    @Transactional
-    User update(User user);
-
-    @Transactional
-    void delete(String userName);
+    public boolean create(User user);
+    public boolean delete(User user);
+    public User get(String userName);
+    public boolean update(String userName, User user);
+    public void clear();
 }

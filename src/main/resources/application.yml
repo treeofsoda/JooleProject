@@ -1,11 +1,21 @@
 spring:
+  main:
+    allow-circular-references: true
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/Joole?characterEncoding=utf-8&useSSL=false
     username: hbstudent
     password: hbstudent
+    url: jdbc:mysql://127.0.0.1:3306/Joole?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+
   jpa:
     hibernate:
-      ddl-auto:  update
+      ddl-auto: update
     show-sql: true
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
+
+myUserName: qsli
+
+server:
+  servlet:
+    context-path: /springsecurity

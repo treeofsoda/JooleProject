@@ -20,16 +20,16 @@ public class ProjectProduct {
     @ManyToOne (cascade = CascadeType.MERGE)
 //    @MapsId("projectId")
     @JoinColumn(
-            name = "project_id",
-            referencedColumnName="project_id"
+            name = "projectId",
+            referencedColumnName="projectId"
     )
     private Project project;
 
     @ManyToOne (cascade = CascadeType.MERGE)
 //    @MapsId("resourceId")
     @JoinColumn(
-            name = "resource_id",
-            referencedColumnName="resource_id"
+            name = "resourceId",
+            referencedColumnName="resourceId"
     )
     private Product product;
 

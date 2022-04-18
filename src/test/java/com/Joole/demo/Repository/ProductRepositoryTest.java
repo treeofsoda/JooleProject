@@ -27,7 +27,7 @@ class ProductRepositoryTest {
                         LocalDateTime.of(2000, 1, 1, 0, 0)
 
                 );
-                random_product1.setResource_id(235);
+                random_product1.setResourceId(235);
                 productRepository.save(random_product1);
                 Assertions.assertNotEquals(null, random_product1);
     }

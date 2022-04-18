@@ -38,7 +38,7 @@ public class Project {
     @JoinColumn(
             name = "owner",
 //            nullable = false,
-            referencedColumnName = "user_name",
+            referencedColumnName = "username",
             foreignKey = @ForeignKey(
                     name = "user_project_fk"
             )

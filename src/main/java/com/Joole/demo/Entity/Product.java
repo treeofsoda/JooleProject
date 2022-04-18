@@ -69,8 +69,8 @@ public class Product {
     public Product() {
     }
 
-    public Product(int resource_id) {
-        this.resourceId = resource_id;
+    public Product(int resourceId) {
+        this.resourceId = resourceId;
     }
 
     public Product(Long modelYear, String brand,
@@ -161,7 +161,7 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "resource_id=" + resourceId +
+                "resourceId=" + resourceId +
                 ", Model_year=" + modelYear +
                 ", Brand='" + brand + '\'' +
                 ", certification='" + certification + '\'' +
