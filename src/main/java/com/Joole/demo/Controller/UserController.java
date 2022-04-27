@@ -43,27 +43,27 @@ public class UserController {
 
     //sign in
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestParam(name="username") String username,
-                                                       @RequestParam(name="password") String password)
-    //@RequestBody User User)
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody User User)
+    //)
             throws Exception {
 
         try {
             myauthenticaitonManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username,password)//User.getUsername(), User.getPassword())
+                    new UsernamePasswordAuthenticationToken(User.getUsername(), User.getPassword())
             );
         }
         catch (BadCredentialsException e) {
-            throw new Exception("Incorrect username or password", e);
+            //throw new Exception("Incorrect username or password", e);
+            return ResponseHandler.generateResponse("Incorrect username or password!", HttpStatus.MULTI_STATUS, null);
         }
 
 
         final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(username);//User.getUsername());
+                .loadUserByUsername(User.getUsername());//);
 
         final String jwt = jwtTokenUtil.generateToken(userDetails);
 
-        return  new ResponseEntity<>(jwt, HttpStatus.OK);
+        return ResponseHandler.generateResponse("Login successful!", HttpStatus.OK, jwt);
     }
 
 
